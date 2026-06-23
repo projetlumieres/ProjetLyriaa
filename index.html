@@ -734,6 +734,71 @@
     border-left: 3px solid var(--accent);
     border-radius: 0 4px 4px 0;
 }
+.share-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 30px 0;
+  font-family: sans-serif;
+}
+
+.share-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #555;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  color: #333;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.share-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Effets au survol (Hover) */
+.share-btn:hover {
+  transform: translateY(-3px);
+  color: #fff;
+}
+
+.x-btn:hover { background-color: #000000; }
+.fb-btn:hover { background-color: #1877F2; }
+.ln-btn:hover { background-color: #0A66C2; }
+.wa-btn:hover { background-color: #25D366; }
+
+/* Style spécifique pour le bouton Copier */
+.copy-btn:hover {
+  background-color: #4CAF50;
+  color: #fff;
+}
+.copy-btn.copied {
+  background-color: #4CAF50;
+  color: #fff;
+  border-radius: 20px;
+  width: auto;
+  padding: 0 15px;
+}
     </style>
 </head>
 <body>
@@ -1221,7 +1286,66 @@
         </div>
 
         <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 30px 0;">
+        <div class="share-container">
+          <span class="share-title">Share this article:</span>
+          <div class="share-buttons">
+            <a href="#" id="share-x" target="_blank" rel="noopener noreferrer" class="share-btn x-btn" title="Share on X">
+              <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+        
+            <a href="#" id="share-fb" target="_blank" rel="noopener noreferrer" class="share-btn fb-btn" title="Share on Facebook">
+              <svg viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+            </a>
+        
+            <a href="#" id="share-linkedin" target="_blank" rel="noopener noreferrer" class="share-btn ln-btn" title="Share on LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+        
+            <a href="#" id="share-wa" target="_blank" rel="noopener noreferrer" class="share-btn wa-btn" title="Share on WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.66.986 3.292 1.493 4.9 1.495 5.429 0 9.849-4.394 9.852-9.793.001-2.616-1.015-5.074-2.862-6.924C16.634 2.082 14.18 1.062 11.577 1.062c-5.43 0-9.85 4.394-9.853 9.793a9.67 9.67 0 0 0 1.504 5.116l-.993 3.624 3.722-.972z"/></svg>
+            </a>
+        
+            <button id="share-copy" class="share-btn copy-btn" title="Copy link">
+              <span id="copy-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              </span>
+              <span id="copy-text" style="display:none; font-size: 12px; font-weight: bold; padding: 0 5px;">Copied!</span>
+            </button>
+          </div>
+        </div>
 
+<script>
+  // Récupère l'URL et le titre de la page actuelle de manière dynamique
+  const pageUrl = encodeURIComponent(window.location.href);
+  const pageTitle = encodeURIComponent(document.title);
+
+  // Injection des liens de partage
+  document.getElementById('share-x').href = `https://x.com/intent/tweet?url=${pageUrl}&text=${pageTitle}`;
+  document.getElementById('share-fb').href = `https://www.facebook.com/sharer/sharer.php?u=${pageUrl}`;
+  document.getElementById('share-linkedin').href = `https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${pageTitle}`;
+  document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${pageTitle}%20${pageUrl}`;
+
+  // Logique du bouton "Copier le lien"
+  document.getElementById('share-copy').addEventListener('click', function() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const icon = document.getElementById('copy-icon');
+      const text = document.getElementById('copy-text');
+      
+      // Feedback visuel temporaire
+      icon.style.display = 'none';
+      text.style.display = 'inline';
+      this.classList.add('copied');
+      
+      setTimeout(() => {
+        icon.style.display = 'inline';
+        text.style.display = 'none';
+        this.classList.remove('copied');
+      }, 2000);
+    }).catch(err => {
+      console.error('Erreur lors de la copie : ', err);
+    });
+  });
+</script>
         <!-- Technoïsme Section (FR) -->
         <div id="technoisme-fr" class="technoisme-content">
             <details class="expandable-section">
