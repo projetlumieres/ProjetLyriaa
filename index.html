@@ -1670,5 +1670,21 @@
             switchLanguage('fr');
         });
     </script>
+    <div id="talkyard-comments" style="margin-top: 40px;"></div>
+
+    <script>
+      // Configuration de Talkyard
+      window.talkyardServerUrl = 'https://projetlyriaa.talkyard.net'; // ⚠️ REMPLACE PAR TON URL TALKYARD
+      
+      // Optionnel : Tu peux forcer la langue en anglais ou français si besoin
+      // window.talkyardLanguage = 'en'; 
+    
+      (function() {
+        var d = document, po = d.createElement('script');
+        po.type = 'text/javascript'; po.async = true;
+        po.src = window.talkyardServerUrl + '/-/talkyard-comments.min.js';
+        (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(po);
+      })();
+    </script>
 </body>
 </html>
